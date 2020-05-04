@@ -1,0 +1,10 @@
+version: '2'
+services:
+    app:
+        container_name: vending_app
+        build:
+            context: docker
+            dockerfile: app.dockerfile
+        working_dir: /home/vending
+        volumes:
+            - ./:/home/vending
