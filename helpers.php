@@ -11,6 +11,7 @@ function menu()
     print '(2) Insert 0.10 coin' . PHP_EOL;
     print '(3) Insert 0.25 coin' . PHP_EOL;
     print '(4) Insert 1.00 coin' . PHP_EOL;
+    print '(r) Return coins' . PHP_EOL;
     print '(x) Exit' . PHP_EOL . PHP_EOL;
     print 'Option: ';
 }

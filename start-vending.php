@@ -49,6 +49,9 @@ while (!$exit) {
             case '4':
                 $vendingMachine->insertCoin('1.00');
                 break;
+            case 'r':
+                $vendingMachine->returnCoins();
+                break;
             default:
                 echo 'Invalid option, try again' . PHP_EOL;
         }

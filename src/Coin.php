@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Exceptions\NotEnoughCoinsException;
+
 class Coin
 {
     private string $code;
@@ -40,6 +42,17 @@ class Coin
     public function add(int $quantity): self
     {
         $this->quantity += $quantity;
+
+        return $this;
+    }
+
+    public function subtract(int $quantity): self
+    {
+        if ($quantity > $this->quantity) {
+            throw new NotEnoughCoinsException();
+        }
+
+        $this->quantity -= $quantity;
 
         return $this;
     }

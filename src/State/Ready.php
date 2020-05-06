@@ -28,4 +28,16 @@ class Ready implements VendingMachineState
         $this->vendingMachine->addToBalance($coin->getTotalAmount());
         $this->vendingMachine->getCoinDeposit()->getCoin($code)->add(1);
     }
+
+    public function returnCoins(): void
+    {
+        $coinsForAmount = $this->vendingMachine->getCoinDeposit()->getCoinsForAmount($this->vendingMachine->getBalance());
+
+        /** @var Coin $coin */
+        foreach($coinsForAmount->getCoins() as $coin) {
+            $this->vendingMachine->getCoinDeposit()->subtractCoinQuantity($coin->getCode(), $coin->getQuantity());
+        }
+
+        $this->vendingMachine->resetBalance();
+    }
 }

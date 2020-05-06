@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\NotEnoughCoinsException;
 use App\Exceptions\OperationNotAllowedException;
 use App\State\Ready;
 use App\State\VendingMachineState;
@@ -40,6 +41,11 @@ class VendingMachine
         return $this->balance;
     }
 
+    public function resetBalance(): void
+    {
+        $this->balance = 0;
+    }
+
     public function addToBalance(float $amount): void
     {
         $this->balance += $amount;
@@ -50,6 +56,15 @@ class VendingMachine
         try {
             $this->state->insertCoin($code);
         } catch (OperationNotAllowedException $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
+    }
+
+    public function returnCoins(): void
+    {
+        try {
+            $this->state->returnCoins();
+        } catch (NotEnoughCoinsException $e) {
             echo $e->getMessage() . PHP_EOL;
         }
     }
