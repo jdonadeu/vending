@@ -2,6 +2,8 @@
 
 use App\Coin;
 use App\CoinDeposit;
+use App\ItemDeposit;
+use App\Item;
 use App\VendingMachine;
 
 function menu()
@@ -21,6 +23,7 @@ function printState(VendingMachine $vendingMachine): void
     print 'State: ' . $vendingMachine->getState()->getCode() . PHP_EOL;
     print 'Balance: ' . $vendingMachine->getBalance() . PHP_EOL;
     print 'Coin deposit: ' . formatCoinDeposit($vendingMachine->getCoinDeposit()) . PHP_EOL;
+    print 'Item deposit: ' . formatItemDeposit($vendingMachine->getItemDeposit()) . PHP_EOL;
 }
 
 function delimiter(): void
@@ -38,6 +41,18 @@ function formatCoinDeposit(CoinDeposit $coinDeposit): string
     }
 
     $str .= ' - Total: ' . $coinDeposit->getTotalAmount();
+
+    return $str;
+}
+
+function formatItemDeposit(ItemDeposit $itemDeposit): string
+{
+    $str = '';
+
+    /** @var Item $item */
+    foreach ($itemDeposit->getItems() as $item) {
+        $str .= $item->getCode() . ' ' . $item->getPrice() . '€ (' . $item->getQuantity() . ') ';
+    }
 
     return $str;
 }

@@ -11,12 +11,14 @@ class VendingMachine
 {
     private VendingMachineState $state;
     private CoinDeposit $coinDeposit;
+    private ItemDeposit $itemDeposit;
     private float $balance;
 
     public function __construct()
     {
         $this->setState(new Ready($this));
         $this->coinDeposit = new CoinDeposit();
+        $this->itemDeposit = new ItemDeposit();
         $this->balance = 0;
     }
 
@@ -34,6 +36,11 @@ class VendingMachine
     public function getCoinDeposit(): CoinDeposit
     {
         return $this->coinDeposit;
+    }
+
+    public function getItemDeposit(): ItemDeposit
+    {
+        return $this->itemDeposit;
     }
 
     public function getBalance(): float

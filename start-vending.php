@@ -1,6 +1,7 @@
 <?php
 
 use App\Coin;
+use App\Item;
 use App\VendingMachine;
 
 require 'vendor/autoload.php';
@@ -16,10 +17,15 @@ echo PHP_EOL;
 
 // Bootstrap
 $vendingMachine = new VendingMachine();
+
 $vendingMachine->getCoinDeposit()->addCoin(new Coin('0.05'));
 $vendingMachine->getCoinDeposit()->addCoin(new Coin('0.10'));
 $vendingMachine->getCoinDeposit()->addCoin(new Coin('0.25'));
 $vendingMachine->getCoinDeposit()->addCoin(new Coin('1.00'));
+
+$vendingMachine->getItemDeposit()->addItem(new Item('water', 0.65));
+$vendingMachine->getItemDeposit()->addItem(new Item('juice', 1.00));
+$vendingMachine->getItemDeposit()->addItem(new Item('soda', 1.50));
 
 $exit = false;
 
