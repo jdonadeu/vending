@@ -5,9 +5,10 @@ namespace App\State;
 use App\Coin;
 use App\Exceptions\NotEnoughBalanceException;
 use App\Exceptions\NotEnoughItemsException;
+use App\Exceptions\OperationNotAllowedException;
 use App\VendingMachine;
 
-class Ready implements VendingMachineState
+class ReadyState implements VendingMachineState
 {
     private const CODE = 'READY';
 
@@ -56,5 +57,15 @@ class Ready implements VendingMachineState
         $this->vendingMachine->getItemDeposit()->getItem($itemCode)->subtract(1);
         $this->vendingMachine->getCoinDeposit()->subtractCoinSet($coinsForAmount);
         $this->vendingMachine->setBalance(0);
+    }
+
+    public function replenishCoin(string $coinCode): void
+    {
+        throw new OperationNotAllowedException();
+    }
+
+    public function replenishItem(string $itemCode): void
+    {
+        throw new OperationNotAllowedException();
     }
 }

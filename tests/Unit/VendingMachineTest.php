@@ -2,7 +2,7 @@
 
 namespace tests\Unit;
 
-use App\State\Ready;
+use App\State\ReadyState;
 use App\VendingMachine;
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +17,7 @@ class VendingMachineTest extends TestCase
 
     public function test_vending_machine_gets_properly_constructed()
     {
-        $readyState = new Ready($this->vendingMachine);
+        $readyState = new ReadyState($this->vendingMachine);
 
         $this->assertEquals(0, $this->vendingMachine->getBalance());
         $this->assertEquals($readyState->getCode(), $this->vendingMachine->getState()->getCode());

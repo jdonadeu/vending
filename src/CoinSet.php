@@ -57,7 +57,7 @@ class CoinSet
         foreach ($coins as $coin) {
             for ($i = 0; $i < $coin->getQuantity(); $i++) {
                 if ((string) ($coinsForAmount->getTotalAmount() + $coin->getValue()) > (string) $amount) {
-                    continue;
+                    break;
                 }
 
                 if ($coinsForAmount->getCoin($coin->getCode()) === null) {
@@ -66,13 +66,13 @@ class CoinSet
                     $coinsForAmount->getCoin($coin->getCode())->add(1);
                 }
 
-                if ($coinsForAmount->getTotalAmount() == $amount) {
+                if ((string) $coinsForAmount->getTotalAmount() == (string) $amount) {
                     return $coinsForAmount;
                 }
             }
         }
 
-        if ($coinsForAmount->getTotalAmount() < $amount) {
+        if ((string) $coinsForAmount->getTotalAmount() < (string) $amount) {
             throw new NotEnoughCoinsException();
         }
 

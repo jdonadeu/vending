@@ -2,11 +2,8 @@
 
 namespace App;
 
-use App\Exceptions\NotEnoughBalanceException;
 use App\Exceptions\NotEnoughCoinsException;
-use App\Exceptions\NotEnoughItemsException;
-use App\Exceptions\OperationNotAllowedException;
-use App\State\Ready;
+use App\State\ReadyState;
 use App\State\VendingMachineState;
 
 class VendingMachine
@@ -18,7 +15,7 @@ class VendingMachine
 
     public function __construct()
     {
-        $this->setState(new Ready($this));
+        $this->setState(new ReadyState($this));
         $this->coinDeposit = new CoinDeposit();
         $this->itemDeposit = new ItemDeposit();
         $this->balance = 0;
@@ -68,7 +65,7 @@ class VendingMachine
     {
         try {
             $this->state->insertCoin($code);
-        } catch (OperationNotAllowedException $e) {
+        } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
     }
@@ -77,7 +74,7 @@ class VendingMachine
     {
         try {
             $this->state->returnCoins();
-        } catch (NotEnoughCoinsException $e) {
+        } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
     }
@@ -92,4 +89,23 @@ class VendingMachine
             print $e->getMessage() . PHP_EOL;
         }
     }
+
+    public function replenishCoin(string $coinCode): void
+    {
+        try {
+            $this->state->replenishCoin($coinCode);
+        } catch (\Exception $e) {
+            print $e->getMessage() . PHP_EOL;
+        }
+    }
+
+    public function replenishItem(string $itemCode): void
+    {
+        try {
+            $this->state->replenishItem($itemCode);
+        } catch (\Exception $e) {
+            print $e->getMessage() . PHP_EOL;
+        }
+    }
+
 }

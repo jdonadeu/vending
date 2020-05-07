@@ -6,18 +6,37 @@ use App\ItemDeposit;
 use App\Item;
 use App\VendingMachine;
 
-function menu()
+function mainMenu()
 {
     print PHP_EOL;
+    print 'MAIN MENU' . PHP_EOL;
+    print '-----------------------' . PHP_EOL;
     print '(1) Insert 0.05 coin' . PHP_EOL;
     print '(2) Insert 0.10 coin' . PHP_EOL;
     print '(3) Insert 0.25 coin' . PHP_EOL;
     print '(4) Insert 1.00 coin' . PHP_EOL;
-    print '(bw) Buy water (0.65€)' . PHP_EOL;
-    print '(bj) Buy juice (1.00€)' . PHP_EOL;
-    print '(bs) Buy soda (1.50€)' . PHP_EOL;
+    print '(5) Buy water (0.65€)' . PHP_EOL;
+    print '(6) Buy juice (1.00€)' . PHP_EOL;
+    print '(7) Buy soda (1.50€)' . PHP_EOL;
     print '(r) Return coins' . PHP_EOL;
+    print '(s) Service' . PHP_EOL;
     print '(x) Exit' . PHP_EOL . PHP_EOL;
+    print 'Option: ';
+}
+
+function serviceMenu()
+{
+    print PHP_EOL;
+    print 'SERVICE MENU' . PHP_EOL;
+    print '-----------------------' . PHP_EOL;
+    print '(1) Add 0.05 coin' . PHP_EOL;
+    print '(2) Add 0.10 coin' . PHP_EOL;
+    print '(3) Add 0.25 coin' . PHP_EOL;
+    print '(4) Add 1.00 coin' . PHP_EOL;
+    print '(5) Add water' . PHP_EOL;
+    print '(6) Add juice' . PHP_EOL;
+    print '(7) Add soda' . PHP_EOL;
+    print '(x) Back to ready' . PHP_EOL . PHP_EOL;
     print 'Option: ';
 }
 
