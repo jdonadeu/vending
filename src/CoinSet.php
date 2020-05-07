@@ -27,11 +27,12 @@ class CoinSet
         $this->coins[$coin->getCode()] = $coin;
     }
 
-    public function subtractCoinQuantity(string $code, int $quantity): void
+    public function subtractCoinSet(CoinSet $coinSet): void
     {
-        $coin = $this->getCoin($code);
-        $coin->subtract($quantity);
-        $this->coins[$code] = $coin;
+        /** @var Coin $coin */
+        foreach($coinSet->getCoins() as $coin) {
+            $this->getCoin($coin->getCode())->subtract($coin->getQuantity());
+        }
     }
 
     public function getTotalAmount(): float

@@ -23,6 +23,19 @@ class VendingMachineTest extends TestCase
         $this->assertEquals($readyState->getCode(), $this->vendingMachine->getState()->getCode());
     }
 
+    public function test_set_balance_updates_balance()
+    {
+        $this->vendingMachine->setBalance(25.50);
+
+        $this->assertEquals(25.50, $this->vendingMachine->getBalance());
+    }
+
+    public function test_set_balance_throws_exception_if_balance_is_negative()
+    {
+        $this->expectException(\Exception::class);
+        $this->vendingMachine->setBalance(-1);
+    }
+
     public function test_add_to_balance_updates_balance()
     {
         $this->vendingMachine->addToBalance(15.5);

@@ -13,6 +13,9 @@ function menu()
     print '(2) Insert 0.10 coin' . PHP_EOL;
     print '(3) Insert 0.25 coin' . PHP_EOL;
     print '(4) Insert 1.00 coin' . PHP_EOL;
+    print '(bw) Buy water (0.65€)' . PHP_EOL;
+    print '(bj) Buy juice (1.00€)' . PHP_EOL;
+    print '(bs) Buy soda (1.50€)' . PHP_EOL;
     print '(r) Return coins' . PHP_EOL;
     print '(x) Exit' . PHP_EOL . PHP_EOL;
     print 'Option: ';
@@ -21,7 +24,7 @@ function menu()
 function printState(VendingMachine $vendingMachine): void
 {
     print 'State: ' . $vendingMachine->getState()->getCode() . PHP_EOL;
-    print 'Balance: ' . $vendingMachine->getBalance() . PHP_EOL;
+    print 'Balance: ' . $vendingMachine->getBalance() . '€' . PHP_EOL;
     print 'Coin deposit: ' . formatCoinDeposit($vendingMachine->getCoinDeposit()) . PHP_EOL;
     print 'Item deposit: ' . formatItemDeposit($vendingMachine->getItemDeposit()) . PHP_EOL;
 }
@@ -40,7 +43,7 @@ function formatCoinDeposit(CoinDeposit $coinDeposit): string
         $str .= $coin->getCode() . '(' . $coin->getQuantity() . ') ';
     }
 
-    $str .= ' - Total: ' . $coinDeposit->getTotalAmount();
+    $str .= ' - Total: ' . $coinDeposit->getTotalAmount() . '€';
 
     return $str;
 }

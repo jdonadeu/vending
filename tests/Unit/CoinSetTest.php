@@ -56,4 +56,23 @@ class CoinSetTest extends TestCase
 
         $this->assertEquals($expectedCoinsForAmount, $coinsForAmount);
     }
+    
+    public function test_subtract_coin_set_actually_subtract_quantities()
+    {
+        $coinSetOne = new CoinSet();
+        $coinSetOne->addCoin(new Coin('0.05', 10));
+        $coinSetOne->addCoin(new Coin('0.10', 5));
+
+        $coinSetTwo = new CoinSet();
+        $coinSetTwo->addCoin(new Coin('0.05', 2));
+        $coinSetTwo->addCoin(new Coin('0.10', 3));
+
+        $expectedCoinSet = new CoinSet();
+        $expectedCoinSet->addCoin(new Coin('0.05', 8));
+        $expectedCoinSet->addCoin(new Coin('0.10', 2));
+
+        $coinSetOne->subtractCoinSet($coinSetTwo);
+
+        $this->assertEquals($expectedCoinSet, $coinSetOne);
+    }
 }

@@ -3,6 +3,8 @@
 namespace App\State;
 
 use App\Coin;
+use App\Exceptions\NotEnoughBalanceException;
+use App\Exceptions\NotEnoughItemsException;
 use App\VendingMachine;
 
 class Ready implements VendingMachineState
@@ -32,12 +34,27 @@ class Ready implements VendingMachineState
     public function returnCoins(): void
     {
         $coinsForAmount = $this->vendingMachine->getCoinDeposit()->getCoinsForAmount($this->vendingMachine->getBalance());
+        $this->vendingMachine->getCoinDeposit()->subtractCoinSet($coinsForAmount);
+        $this->vendingMachine->setBalance(0);
+    }
 
-        /** @var Coin $coin */
-        foreach($coinsForAmount->getCoins() as $coin) {
-            $this->vendingMachine->getCoinDeposit()->subtractCoinQuantity($coin->getCode(), $coin->getQuantity());
+    public function buy(string $itemCode): void
+    {
+        $item = $this->vendingMachine->getItemDeposit()->getItem($itemCode);
+
+        if ($item->getPrice() > $this->vendingMachine->getBalance()) {
+            throw new NotEnoughBalanceException();
         }
 
-        $this->vendingMachine->resetBalance();
+        if ($item->getQuantity() == 0) {
+            throw new NotEnoughItemsException();
+        }
+
+        $change = $this->vendingMachine->getBalance() - $item->getPrice();
+        $coinsForAmount = $this->vendingMachine->getCoinDeposit()->getCoinsForAmount($change);
+
+        $this->vendingMachine->getItemDeposit()->getItem($itemCode)->subtract(1);
+        $this->vendingMachine->getCoinDeposit()->subtractCoinSet($coinsForAmount);
+        $this->vendingMachine->setBalance(0);
     }
 }

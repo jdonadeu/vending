@@ -58,9 +58,20 @@ while (!$exit) {
             case 'r':
                 $vendingMachine->returnCoins();
                 break;
+            case 'bw':
+                $vendingMachine->buy('water');
+                break;
+            case 'bj':
+                $vendingMachine->buy('juice');
+                break;
+            case 'bs':
+                $vendingMachine->buy('soda');
+                break;
             default:
                 echo 'Invalid option, try again' . PHP_EOL;
         }
+
+        delimiter();
     } else {
         $exit = true;
     }
