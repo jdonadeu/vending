@@ -23,6 +23,7 @@ Error handling is mainly managed by throwing and catching exceptions.
 ## Further improvements
 - Add more states: For example, 'Dispensing an item' might be a state itself during which most operations are not allowed.
 - Add tests to the State objects.
+- Remove 'print' instructions from VendingMachine model.
 
 ## Note for Windows users
 Windows users might have to replace 
