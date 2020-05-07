@@ -117,6 +117,7 @@ while (!$exit) {
             delimiter();
         } else {
             $vendingMachine->setState(new ReadyState($vendingMachine));
+            delimiter();
         }
     }
 }

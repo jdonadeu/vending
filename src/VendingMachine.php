@@ -65,6 +65,7 @@ class VendingMachine
     {
         try {
             $this->state->insertCoin($code);
+            print $code . ' coin inserted' . PHP_EOL;
         } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
@@ -74,6 +75,7 @@ class VendingMachine
     {
         try {
             $this->state->returnCoins();
+            print 'Coins returned' . PHP_EOL;
         } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
@@ -83,6 +85,7 @@ class VendingMachine
     {
         try {
             $this->state->buy($itemCode);
+            print 'Item ' . $itemCode . ' dispensed' . PHP_EOL;
         } catch (NotEnoughCoinsException $e) {
             print 'Not enough coins to return change' . PHP_EOL;
         } catch (\Exception $e) {
@@ -94,6 +97,7 @@ class VendingMachine
     {
         try {
             $this->state->replenishCoin($coinCode);
+            print $coinCode . ' coin added to deposit' . PHP_EOL;
         } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
@@ -103,9 +107,9 @@ class VendingMachine
     {
         try {
             $this->state->replenishItem($itemCode);
+            print 'Item ' . $itemCode . ' added to the machine' . PHP_EOL;
         } catch (\Exception $e) {
             print $e->getMessage() . PHP_EOL;
         }
     }
-
 }
